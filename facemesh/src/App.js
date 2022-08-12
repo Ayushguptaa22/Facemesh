@@ -3,6 +3,7 @@ import './App.css';
 import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/facemesh";
 import Webcam from 'react-webcam';
+import { drawMesh } from './utilities';
 
 function App() {
   //references setup
@@ -42,6 +43,10 @@ function App() {
       //making detections
       const face= await net.estimateFaces(video);
       console.log(face);
+
+      //get canvas context for drawing
+      const ctx= canvasRef.current.getContext("2d");
+      drawMesh(face,ctx)
 
     }
   };
